@@ -13,6 +13,10 @@ namespace RPKIdecoder
 
         private List<IpAddressBlock> ipAddressBlocks;
 
+        private DateTimeOffset startDateTime;
+
+        private DateTimeOffset finalDateTime;
+
         public ROA()
         {
             ipAddressBlocks = new List<IpAddressBlock>();
