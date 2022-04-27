@@ -149,7 +149,7 @@ namespace RPKIdecoder
                 }
                 decodedRoa.getIpAddressBlock().Add(decodedIpAddressBlock);
             }
-            Console.Write(decodedRoa.ToString());
+
             return decodedRoa;
         }
 

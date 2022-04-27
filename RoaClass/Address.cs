@@ -46,9 +46,9 @@ namespace RPKIdecoder
         {
             if (this.maxLength == 0)
             {
-                return "\nIP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : not present" ;
+                return "IP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : not present \n" ;
             }
-            return "\nIP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : " + this.maxLength;
+            return "IP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : " + this.maxLength + "\n";
         }
     }
 }

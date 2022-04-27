@@ -27,8 +27,8 @@ namespace RPKIdecoder
         override
         public string ToString()
         {
-            StringBuilder stringa = new StringBuilder("");
-            stringa.Append("\nAddress family : " + addressFamily);
+            StringBuilder stringa = new StringBuilder();
+            stringa.Append("Address family : " + addressFamily + "\n");
             foreach(Address a in addresses)
             {
                 stringa.Append(a.ToString());

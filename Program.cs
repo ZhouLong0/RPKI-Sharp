@@ -25,16 +25,19 @@ namespace RPKIdecoder
 
             foreach (string txtName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.roa", SearchOption.AllDirectories))
             {
-                Console.WriteLine("\n\n\n");
                 byte[] fileRoa = File.ReadAllBytes(txtName);
                 byte[] extracted = ExtractEnvelopedData.ExtractContent(fileRoa);
-                decodedRoas.Add(DecoderData.DecodeROA(extracted));
+                ROA decodedRoaFile = DecoderData.DecodeROA(extracted);
+                decodedRoaFile.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
+                decodedRoaFile.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
+                decodedRoas.Add(decodedRoaFile);
+                Console.WriteLine(decodedRoaFile);
             }
 
-            foreach (ROA decROA in decodedRoas)
-            {
-                Console.WriteLine(decROA);
-            }
+            //foreach (ROA decROA in decodedRoas)
+            //{
+            //    Console.WriteLine(decROA);
+            //}
 
             int a = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories).Length;
             Console.WriteLine(a + "  files mft");

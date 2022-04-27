@@ -15,7 +15,7 @@ namespace RPKIdecoder
 
         private DateTimeOffset startDateTime;
 
-        private DateTimeOffset finalDateTime;
+        private DateTimeOffset endDateTime;
 
         public ROA()
         {
@@ -41,17 +41,30 @@ namespace RPKIdecoder
         {
             return this.ipAddressBlocks;   
         }
+
+        public void setStartDateTime(DateTimeOffset startDate)
+        {
+            this.startDateTime = startDate;
+        }
+
+        public void setEndDateTime(DateTimeOffset endDate)
+        {
+            this.endDateTime = endDate;
+        }
+
         override
         public string ToString()
         {
-            StringBuilder stringa = new StringBuilder("");
-            stringa.Append("\nNumber of byte : " + numberOfByte);
-            stringa.Append("\nAs number : " + asNumber);
-
+            StringBuilder stringa = new StringBuilder();
+            stringa.Append("Number of byte : " + numberOfByte +"\n");
+            stringa.Append("As number : " + asNumber + "\n");
+            stringa.Append("Not Before : " + startDateTime + "\n");
+            stringa.Append("Not After : " + endDateTime + "\n");
             foreach (IpAddressBlock i in ipAddressBlocks)
             {
                 stringa.Append(i.ToString());
             }
+            stringa.Append("\n\n\n");
             return stringa.ToString();
 
         }
