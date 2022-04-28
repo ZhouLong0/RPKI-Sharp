@@ -1,4 +1,5 @@
-﻿using RPKIdecoder.MftClass;
+﻿using Org.BouncyCastle.X509;
+using RPKIdecoder.MftClass;
 using System;
 using System.Formats.Asn1;
 using System.Net;
@@ -220,6 +221,13 @@ namespace RPKIdecoder
                 decodedMFT.getFileAndHashes().Add(fileAndHash);
             }
             return decodedMFT;
+        }
+
+        public static X509Crl DecodeCRL(byte[] roaData)
+        {
+            X509CrlParser crlParser = new X509CrlParser();
+            X509Crl decodedCRL = crlParser.ReadCrl(roaData);
+            return decodedCRL;
         }
 
     }

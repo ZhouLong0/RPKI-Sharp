@@ -6,6 +6,8 @@ using System.Numerics;
 using System.Collections.Generic;
 using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
+using System.Security.Cryptography.X509Certificates;
+using Org.BouncyCastle.X509;
 
 namespace RPKIdecoder
 {
@@ -17,42 +19,64 @@ namespace RPKIdecoder
         {
             /***************************************** open ALL files from directory path *****************************************/
 
-            List<ROA> decodedRoas = new List<ROA>();
-            List<MFT> decodedMfts = new List<MFT>();
+            //List<ROA> decodedRoas = new List<ROA>();
+            //List<MFT> decodedMfts = new List<MFT>();
 
-            int aa = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.roa", SearchOption.AllDirectories).Length;
-            Console.WriteLine(aa + "  files roa");
+            //int aa = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.roa", SearchOption.AllDirectories).Length;
+            //Console.WriteLine(aa + "  files roa");
 
-            foreach (string txtName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.roa", SearchOption.AllDirectories))
-            {
-                byte[] fileRoa = File.ReadAllBytes(txtName);
-                byte[] extracted = ExtractEnvelopedData.ExtractContent(fileRoa);
-                ROA decodedRoaFile = DecoderData.DecodeROA(extracted);
-                decodedRoaFile.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
-                decodedRoaFile.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
-                decodedRoas.Add(decodedRoaFile);
-                Console.WriteLine(decodedRoaFile);
-            }
-
-            //foreach (ROA decROA in decodedRoas)
+            //foreach (string txtName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.roa", SearchOption.AllDirectories))
             //{
-            //    Console.WriteLine(decROA);
+            //    byte[] fileRoa = File.ReadAllBytes(txtName);
+            //    byte[] extracted = ExtractEnvelopedData.ExtractContent(fileRoa);
+            //    ROA decodedRoaFile = DecoderData.DecodeROA(extracted);
+            //    decodedRoaFile.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
+            //    decodedRoaFile.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
+            //    decodedRoas.Add(decodedRoaFile);
+            //    Console.WriteLine(decodedRoaFile);
             //}
 
-            int a = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories).Length;
-            Console.WriteLine(a + "  files mft");
-            foreach (string mftName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories))
+            ////foreach (ROA decROA in decodedRoas)
+            ////{
+            ////    Console.WriteLine(decROA);
+            ////}
+
+            //int a = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories).Length;
+            //Console.WriteLine(a + "  files mft");
+            //foreach (string mftName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories))
+            //{
+            //    byte[] fileMft = File.ReadAllBytes(mftName);
+            //    byte[] extracted = ExtractEnvelopedData.ExtractContent(fileMft);
+            //    decodedMfts.Add(DecoderData.DecodeMFT(extracted));
+            //}
+
+            //foreach (MFT decMFT in decodedMfts)
+            //{
+            //    Console.WriteLine(decMFT);
+            //}
+            //Console.WriteLine(decodedMfts.Count +"mft files decoded");
+
+
+            /*********************************************************************************************************
+             ************************************************** CRL **************************************************
+             *********************************************************************************************************/
+
+            int crlNum = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.crl", SearchOption.AllDirectories).Length;
+            Console.WriteLine(crlNum + "  files crl");
+            foreach (string crlName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.crl", SearchOption.AllDirectories))
             {
-                byte[] fileMft = File.ReadAllBytes(mftName);
-                byte[] extracted = ExtractEnvelopedData.ExtractContent(fileMft);
-                decodedMfts.Add(DecoderData.DecodeMFT(extracted));
+                byte[] fileCrl = File.ReadAllBytes(crlName);
+                X509Crl decodedCrlFile = DecoderData.DecodeCRL(fileCrl);
+                Console.WriteLine("******************* START DECODING CRL *****************\n");
+                Console.WriteLine(decodedCrlFile);
+                Console.WriteLine("\n\n");
             }
 
-            foreach (MFT decMFT in decodedMfts)
-            {
-                Console.WriteLine(decMFT);
-            }
-            Console.WriteLine(decodedMfts.Count +"mft files decoded");
+
+
+
+
+
 
             /***************************************** open only ONE file from file path *****************************************/
             //string pathROA = @"C:\Users\zhoul\Desktop\repo.tar\repo\ripencc.tal\2022\02\02\out\rta\validated\0.sb\0.sb\repo\sb\0\36322e3130362e37352e302f32342d3234203d3e2038383838.roa";
@@ -66,9 +90,12 @@ namespace RPKIdecoder
             //DecoderData.DecodeROA(extractedROA);
             //DecoderData.DecodeMFT(extractedMFT);
 
-            //byte[] asn1Data = File.ReadAllBytes(@"C:\Users\zhoul\Desktop\F7QA6Bcu4v_o_qeL4ib7RxbBhis.roa");
-            //byte[] extractedROA = ExtractEnvelopedData.ExtractContent(asn1Data);
-            //File.WriteAllBytes(@"C:\Users\zhoul\Desktop\signedatt12.roa", extractedROA);
+            //byte[] asn1Data = File.ReadAllBytes(@"C:\Users\zhoul\Desktop\6a\00adb0-890d-47ad-a18c-4ad0abec275e\1\GqGckulmd_X5b2jxygqtn6MR60U.crl");
+            //byte[] extractedROA = ExtractEnvelopedData.ExtractCrl(asn1Data);
+            //File.WriteAllBytes(@"C:\Users\zhoul\Desktop\signedata2.crl", extractedROA
+
+            //File.WriteAllBytes(@"C:\Users\zhoul\Desktop\signedata2.crl", extractedROA);
+
 
 
         }

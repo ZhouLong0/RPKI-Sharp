@@ -52,5 +52,20 @@ namespace RPKIdecoder.ExtractEveloped
 
             return cms.ContentInfo.Content;
         }
+
+        public static byte[] ExtractCrl(byte[] signature)
+        {
+            if (signature == null)
+                throw new ArgumentNullException("signature");
+
+            // decode the signature
+            SignedCms cms = new SignedCms();
+            cms.Decode(signature);
+
+            if (cms.Detached)
+                throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
+
+            return cms.ContentInfo.Content;
+        }
     }
 }
