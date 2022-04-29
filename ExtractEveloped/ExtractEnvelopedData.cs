@@ -15,7 +15,6 @@ namespace RPKIdecoder.ExtractEveloped
             // decode the signature
             SignedCms cms = new SignedCms();
             cms.Decode(signature);
-
             if (cms.Detached)
                 throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
 

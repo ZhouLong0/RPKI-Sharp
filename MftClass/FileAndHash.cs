@@ -20,6 +20,11 @@ namespace RPKIdecoder.MftClass
             this.hash = hash;
         }
 
+        public String getFile()
+        {
+            return this.file;
+        }
+
         override
         public string ToString()
         {

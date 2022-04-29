@@ -1,7 +1,9 @@
 ﻿using Org.BouncyCastle.X509;
+using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
 using System;
 using System.Formats.Asn1;
+using System.IO;
 using System.Net;
 using System.Numerics;
 using System.Security.Cryptography.Pkcs;
