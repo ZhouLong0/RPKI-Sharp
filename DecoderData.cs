@@ -12,6 +12,7 @@ namespace RPKIdecoder
 {
     class DecoderData
 
+
     {
         /* Method that takes an array of bytes of a ROA file and print the decoded content */
         public static ROA DecodeROA(byte[] roaData)
