@@ -41,14 +41,17 @@ namespace RPKIdecoder
             ////    Console.WriteLine(decROA);
             ////}
 
-            int a = Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories).Length;
+            int a = Directory.GetFiles(@"C:\Users\zhoul\Desktop\1", "*.mft", SearchOption.AllDirectories).Length;
             Console.WriteLine(a + "  files mft");
-            foreach (string mftName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*.mft", SearchOption.AllDirectories))
+            foreach (string mftName in Directory.GetFiles(@"C:\Users\zhoul\Desktop\1", "*.mft", SearchOption.AllDirectories))
             {
                 byte[] fileMft = File.ReadAllBytes(mftName);
                 ExtractEnvelopedData.ExtractStartDateTime(fileMft);
                 byte[] extracted = ExtractEnvelopedData.ExtractContent(fileMft);
                 MFT decodedMft = DecoderData.DecodeMFT(extracted);
+                Console.WriteLine(" ************************ DECODING MFT ************************* ");
+                Console.WriteLine(ExtractEnvelopedData.ExtractSerialNumber(fileMft));
+                Console.WriteLine(ExtractEnvelopedData.ExtractIssuerNumber(fileMft));
                 Console.WriteLine((DecoderData.DecodeMFT(extracted)));
                 foreach (FileAndHash fh in decodedMft.getFileAndHashes())
                 {
@@ -56,7 +59,7 @@ namespace RPKIdecoder
 
                     if (Path.GetExtension(fileToDecode) == ".roa")
                     {
-                        foreach (string roaToOpen in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*" + fileToDecode, SearchOption.AllDirectories))
+                        foreach (string roaToOpen in Directory.GetFiles(@"C:\Users\zhoul\Desktop\1", "*" + fileToDecode, SearchOption.AllDirectories))
                         {
                             byte[] fileRoa = File.ReadAllBytes(roaToOpen);
                             byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
@@ -64,12 +67,14 @@ namespace RPKIdecoder
                             decodedRoa.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
                             decodedRoa.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
                             Console.WriteLine(fileToDecode);
+                            Console.WriteLine(ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
+                            Console.WriteLine(ExtractEnvelopedData.ExtractIssuerNumber(fileRoa));
                             Console.WriteLine(decodedRoa);
                         }
                     }
                     if (Path.GetExtension(fileToDecode) == ".crl")
                     {
-                        foreach (string roaToOpen in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*" + fileToDecode, SearchOption.AllDirectories))
+                        foreach (string roaToOpen in Directory.GetFiles(@"C:\Users\zhoul\Desktop\1", "*" + fileToDecode, SearchOption.AllDirectories))
                         {
                             byte[] fileCrl = File.ReadAllBytes(roaToOpen);
                             X509Crl decodedCrl = DecoderData.DecodeCRL(fileCrl); 

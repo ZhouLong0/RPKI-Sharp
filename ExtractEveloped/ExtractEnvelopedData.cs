@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Security.Cryptography.Pkcs;
 using System.Text;
 
@@ -65,6 +66,34 @@ namespace RPKIdecoder.ExtractEveloped
                 throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
 
             return cms.ContentInfo.Content;
+        }
+
+        public static BigInteger ExtractSerialNumber(byte[] signature)
+        {
+            if (signature == null)
+                throw new ArgumentNullException("signature");
+
+            // decode the signature
+            SignedCms cms = new SignedCms();
+            cms.Decode(signature);
+            if (cms.Detached)
+                throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
+
+            return new BigInteger(cms.Certificates[0].GetSerialNumber());
+        }
+
+        public static string ExtractIssuerNumber(byte[] signature)
+        {
+            if (signature == null)
+                throw new ArgumentNullException("signature");
+
+            // decode the signature
+            SignedCms cms = new SignedCms();
+            cms.Decode(signature);
+            if (cms.Detached)
+                throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
+
+            return cms.Certificates[0].GetIssuerName();
         }
     }
 }
