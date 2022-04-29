@@ -67,6 +67,16 @@ namespace RPKIdecoder
                             Console.WriteLine(decodedRoa);
                         }
                     }
+                    if (Path.GetExtension(fileToDecode) == ".crl")
+                    {
+                        foreach (string roaToOpen in Directory.GetFiles(@"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated", "*" + fileToDecode, SearchOption.AllDirectories))
+                        {
+                            byte[] fileCrl = File.ReadAllBytes(roaToOpen);
+                            X509Crl decodedCrl = DecoderData.DecodeCRL(fileCrl); 
+                            Console.WriteLine(fileToDecode);
+                            Console.WriteLine(decodedCrl);
+                        }
+                    }
 
                 }
             }
