@@ -24,10 +24,9 @@ namespace RPKIdecoder
             int undecodedBit;                          
             int offset = 0;
 
-            decodedRoa.setNumberOfByte(totalByte);
             decodedRoa.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
             decodedRoa.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
-            decodedRoa.setSerialNumber((int)ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
+            decodedRoa.setSerialNumber(ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
             decodedRoa.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileRoa));
             /***********************************************************************************/
             /******************* DECODING SEQUENCE: ROUTE ORIGIN ADDRESS ***********************/
@@ -169,8 +168,7 @@ namespace RPKIdecoder
             offset = 0;
 
             MFT decodedMFT = new MFT();
-            decodedMFT.setNumberOfByte(numberOfTotalByte);
-            decodedMFT.setSerialNumber((int)ExtractEnvelopedData.ExtractSerialNumber(fileMft));
+            decodedMFT.setSerialNumber(ExtractEnvelopedData.ExtractSerialNumber(fileMft));
             decodedMFT.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileMft));
 
             /***********************************************************************************/

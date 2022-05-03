@@ -7,11 +7,9 @@ namespace RPKIdecoder
 {
     class ROA
     {
-        private int serialNumber;
+        private BigInteger serialNumber;
 
         private string issuerNumber;
-
-        private int numberOfByte;
 
         private BigInteger asNumber;
 
@@ -26,7 +24,7 @@ namespace RPKIdecoder
             ipAddressBlocks = new List<IpAddressBlock>();
         }
 
-        public void setSerialNumber(int serialNumber)
+        public void setSerialNumber(BigInteger serialNumber)
         {
             this.serialNumber = serialNumber;
         }
@@ -34,16 +32,6 @@ namespace RPKIdecoder
         public void setIssuerNumber(string issuerNumber)
         {
             this.issuerNumber = issuerNumber;
-        }
-
-        public void setNumberOfByte(int numberOfByte)
-        {
-            this.numberOfByte = numberOfByte;
-        }
-
-        public BigInteger getAsNumber()
-        {
-            return this.numberOfByte;
         }
 
         public void setAsNumber(BigInteger asNumber)
@@ -72,7 +60,6 @@ namespace RPKIdecoder
             StringBuilder stringa = new StringBuilder();
             stringa.Append("Certificate serial number : " + this.serialNumber + "\n");
             stringa.Append("Issuer Number : " + this.issuerNumber + "\n");
-            stringa.Append("Number of byte : " + this.numberOfByte +"\n");
             stringa.Append("As number : " + this.asNumber + "\n");
             stringa.Append("Not Before : " + this.startDateTime + "\n");
             stringa.Append("Not After : " + this.endDateTime + "\n");

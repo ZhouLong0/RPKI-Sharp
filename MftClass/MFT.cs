@@ -12,11 +12,9 @@ namespace RPKIdecoder.MftClass
             this.filesAndHashes = new List<FileAndHash>();
         }
 
-        private int serialNumber;
+        private BigInteger serialNumber;
 
         private string issuerNumber;
-
-        private int numberOfByte;
 
         private BigInteger manifestNumber;
 
@@ -28,7 +26,7 @@ namespace RPKIdecoder.MftClass
 
         private List<FileAndHash> filesAndHashes;
 
-        public void setSerialNumber(int serialNumber)
+        public void setSerialNumber(BigInteger serialNumber)
         {
             this.serialNumber = serialNumber;
         }
@@ -38,13 +36,6 @@ namespace RPKIdecoder.MftClass
             this.issuerNumber = issuerNumber;
         }
 
-
-
-        public void setNumberOfByte(int n)
-        {
-            this.numberOfByte = n;
-        }
-        
         public void setManifestNumber(BigInteger mn)
         {
             this.manifestNumber = mn;
@@ -75,7 +66,6 @@ namespace RPKIdecoder.MftClass
             StringBuilder stringa = new StringBuilder();
             stringa.Append("Certificate serial number : " + this.serialNumber + "\n");
             stringa.Append("Issuer number : " + this.issuerNumber + "\n");
-            stringa.Append("Number total of byte: " + this.numberOfByte + "\n");
             stringa.Append("Manifest number : " + this.manifestNumber + "\n");
             stringa.Append("This update: " + this.thisUpdate + "\n" + "Next update: " + this.nextUpdate + "\n");
             stringa.Append("FileHashAlg: " + this.fileHashAlg + "\n");
