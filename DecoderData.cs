@@ -14,8 +14,8 @@ namespace RPKIdecoder
 
 
     {
-        /* Method that takes an array of bytes of a ROA file and print the decoded content */
-        public static ROA DecodeROA(byte[] roaData)
+        /* Method that takes an array of bytes of a ROA file and returns the decoded content in a class */
+        public static ROA DecodeROA(byte[] fileRoa, byte[] roaData)
         {
             ROA decodedRoa = new ROA();
 
@@ -25,7 +25,10 @@ namespace RPKIdecoder
             int offset = 0;
 
             decodedRoa.setNumberOfByte(totalByte);
-
+            decodedRoa.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
+            decodedRoa.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
+            decodedRoa.setSerialNumber((int)ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
+            decodedRoa.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileRoa));
             /***********************************************************************************/
             /******************* DECODING SEQUENCE: ROUTE ORIGIN ADDRESS ***********************/
             /***********************************************************************************/
@@ -159,7 +162,7 @@ namespace RPKIdecoder
 
 
 
-        public static MFT DecodeMFT(byte[] roaData)
+        public static MFT DecodeMFT(byte[] fileMft,byte[] roaData)
         {
             int offset, length, consumed, decodedByte, numberOfTotalByte, undecodedByte;
             numberOfTotalByte = roaData.Length;
@@ -167,6 +170,8 @@ namespace RPKIdecoder
 
             MFT decodedMFT = new MFT();
             decodedMFT.setNumberOfByte(numberOfTotalByte);
+            decodedMFT.setSerialNumber((int)ExtractEnvelopedData.ExtractSerialNumber(fileMft));
+            decodedMFT.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileMft));
 
             /***********************************************************************************/
             /********************** DECODING SEQUENCE OF MANIFEST BLOCK ************************/

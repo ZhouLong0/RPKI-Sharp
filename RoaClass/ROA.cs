@@ -7,6 +7,10 @@ namespace RPKIdecoder
 {
     class ROA
     {
+        private int serialNumber;
+
+        private string issuerNumber;
+
         private int numberOfByte;
 
         private BigInteger asNumber;
@@ -20,6 +24,16 @@ namespace RPKIdecoder
         public ROA()
         {
             ipAddressBlocks = new List<IpAddressBlock>();
+        }
+
+        public void setSerialNumber(int serialNumber)
+        {
+            this.serialNumber = serialNumber;
+        }
+
+        public void setIssuerNumber(string issuerNumber)
+        {
+            this.issuerNumber = issuerNumber;
         }
 
         public void setNumberOfByte(int numberOfByte)
@@ -56,10 +70,12 @@ namespace RPKIdecoder
         public string ToString()
         {
             StringBuilder stringa = new StringBuilder();
-            stringa.Append("Number of byte : " + numberOfByte +"\n");
-            stringa.Append("As number : " + asNumber + "\n");
-            stringa.Append("Not Before : " + startDateTime + "\n");
-            stringa.Append("Not After : " + endDateTime + "\n");
+            stringa.Append("Certificate serial number : " + this.serialNumber + "\n");
+            stringa.Append("Issuer Number : " + this.issuerNumber + "\n");
+            stringa.Append("Number of byte : " + this.numberOfByte +"\n");
+            stringa.Append("As number : " + this.asNumber + "\n");
+            stringa.Append("Not Before : " + this.startDateTime + "\n");
+            stringa.Append("Not After : " + this.endDateTime + "\n");
             foreach (IpAddressBlock i in ipAddressBlocks)
             {
                 stringa.Append(i.ToString());

@@ -29,7 +29,7 @@ namespace RPKIdecoder.MftClass
         public string ToString()
         {
             StringBuilder stringa = new StringBuilder();
-            stringa.Append("File name: " +this.file + "\n" + "Hash: ");
+            stringa.Append("File common name: " +this.file + "\n" + "Hash: ");
             foreach(int i in hash)
             {
                 stringa.Append(i);
