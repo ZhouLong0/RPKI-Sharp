@@ -34,6 +34,11 @@ namespace RPKIdecoder
             this.issuerNumber = issuerNumber;
         }
 
+        public string getIssuerNumber()
+        {
+            return this.issuerNumber;
+        }
+
         public void setAsNumber(BigInteger asNumber)
         {
             this.asNumber = asNumber;

@@ -23,7 +23,7 @@ namespace RPKIdecoder
             List<MFT> decodedMftsList = new List<MFT>();
 
           
-            string directoryPath = @"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated";
+            string directoryPath = @"C:\Users\Lucrezia\OneDrive\Desktop\6";
 
             //int a = Directory.GetFiles(directoryPath, "*.mft", SearchOption.AllDirectories).Length;
             //Console.WriteLine(a + "  files mft");
@@ -38,7 +38,7 @@ namespace RPKIdecoder
                 Console.WriteLine(" ************************ DECODING MFT ************************* ");
                 Console.WriteLine(decodedMft);
                 decodedMftsList.Add(decodedMft);
-
+                
                 /********************************** START TO DECODE CERTIFICATES IN THE MANIFEST **************************************/
                 foreach (FileAndHash fh in decodedMft.getFileAndHashes())
                 {
@@ -52,7 +52,10 @@ namespace RPKIdecoder
                             byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
                             ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
                             Console.WriteLine("Common name: " + fileToDecode);
+                            if (decodedRoa.getIssuerNumber() != decodedMft.getIssuerNumber())
+                                throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedRoa);
+                            
                         }
                     }
                     if (Path.GetExtension(fileToDecode) == ".crl")
@@ -62,6 +65,8 @@ namespace RPKIdecoder
                             byte[] fileCrl = File.ReadAllBytes(roaToOpen);
                             X509Crl decodedCrl = DecoderData.DecodeCRL(fileCrl); 
                             Console.WriteLine("Common name : " + fileToDecode);
+                            if (decodedCrl.IssuerDN.ToString() != decodedMft.getIssuerNumber())
+                                throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedCrl);
                         }
                     }

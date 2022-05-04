@@ -60,6 +60,11 @@ namespace RPKIdecoder.MftClass
             return this.filesAndHashes;
         }
 
+        public string getIssuerNumber()
+        {
+            return this.issuerNumber;
+        }
+
         override
         public string ToString()
         {
