@@ -7,6 +7,8 @@ namespace RPKIdecoder
 {
     class ROA
     {
+        private string commonName;
+
         private BigInteger serialNumber;
 
         private string issuerNumber;
@@ -59,11 +61,17 @@ namespace RPKIdecoder
             this.endDateTime = endDate;
         }
 
+        public void setCommonName(String commonName)
+        {
+            this.commonName = commonName;
+        }
+
         override
         public string ToString()
         {
             StringBuilder stringa = new StringBuilder();
-            stringa.Append("Certificate serial number : " + this.serialNumber + "\n");
+            stringa.Append("Common Name : " + this.commonName + "\n");
+            stringa.Append("Serial number : " + this.serialNumber + "\n");
             stringa.Append("Issuer Number : " + this.issuerNumber + "\n");
             stringa.Append("As number : " + this.asNumber + "\n");
             stringa.Append("Not Before : " + this.startDateTime + "\n");

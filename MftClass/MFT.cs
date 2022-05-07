@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Org.BouncyCastle.X509;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text;
@@ -10,6 +11,8 @@ namespace RPKIdecoder.MftClass
         public MFT()
         {
             this.filesAndHashes = new List<FileAndHash>();
+            this.roaList = new List<ROA>();
+            this.crlList = new List<X509Crl>();
         }
 
         private BigInteger serialNumber;
@@ -25,6 +28,13 @@ namespace RPKIdecoder.MftClass
         private string fileHashAlg;
 
         private List<FileAndHash> filesAndHashes;
+
+        private List<ROA> roaList;
+
+        private List<X509Crl> crlList;
+
+
+
 
         public void setSerialNumber(BigInteger serialNumber)
         {
@@ -59,6 +69,16 @@ namespace RPKIdecoder.MftClass
         {
             return this.filesAndHashes;
         }
+
+        public List<ROA> getRoaList()
+        {
+            return this.roaList;
+        }
+        public List<X509Crl> getCrlList()
+        {
+            return this.crlList;
+        }
+
 
         public string getIssuerNumber()
         {

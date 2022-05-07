@@ -109,6 +109,7 @@ namespace RPKIdecoder
                    
                     decodedAddress.setIpAddress(ip);
                     decodedAddress.setNetmask(netMask);
+
                     
 
                     decodedIpAddressBlock.getAddresses().Add(decodedAddress);
