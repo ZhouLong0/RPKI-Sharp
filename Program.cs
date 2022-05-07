@@ -23,7 +23,7 @@ namespace RPKIdecoder
             List<MFT> decodedMftsList = new List<MFT>();
 
           
-            string directoryPath = @"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated";
+            string directoryPath = @"C:\Users\zhoul\Desktop\2022\02\02\out\rta\validated\rrdp.krill.cloud";
 
             //int a = Directory.GetFiles(directoryPath, "*.mft", SearchOption.AllDirectories).Length;
             //Console.WriteLine(a + "  files mft");
