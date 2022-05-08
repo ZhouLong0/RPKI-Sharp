@@ -1,4 +1,5 @@
 ﻿using Org.BouncyCastle.X509;
+using RPKIdecoder.CrlClass;
 using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
 using System;
@@ -230,11 +231,25 @@ namespace RPKIdecoder
             return decodedMFT;
         }
 
-        public static X509Crl DecodeCRL(byte[] roaData)
+        public static CRL DecodeCRL(byte[] roaData)
         {
             X509CrlParser crlParser = new X509CrlParser();
-            X509Crl decodedCRL = crlParser.ReadCrl(roaData);
-            return decodedCRL;
+            X509Crl decodedX509Crl = crlParser.ReadCrl(roaData);
+
+            CRL decodedCrl = new CRL();
+            decodedCrl.setIssuerName(decodedX509Crl.IssuerDN.ToString());
+            decodedCrl.setThisUpdate(decodedX509Crl.ThisUpdate);
+            decodedCrl.setNextUpdate(decodedX509Crl.NextUpdate.Value);
+
+            foreach (X509CrlEntry rc in decodedX509Crl.GetRevokedCertificates())
+            {
+                revokedCertificate revokedCertificate = new revokedCertificate();
+                revokedCertificate.setSerialNumber(BigInteger.Parse(rc.SerialNumber.ToString()));
+                revokedCertificate.setRevocationTime(rc.RevocationDate);
+                decodedCrl.getRevokedCertificates().Add(revokedCertificate);
+            }
+
+            return decodedCrl;
         }
 
     }

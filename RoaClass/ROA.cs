@@ -66,6 +66,12 @@ namespace RPKIdecoder
             this.commonName = commonName;
         }
 
+        public BigInteger getSerialNumber()
+        {
+            return this.serialNumber;
+        }
+
+
         override
         public string ToString()
         {

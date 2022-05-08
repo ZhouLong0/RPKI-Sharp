@@ -1,4 +1,5 @@
 ﻿using Org.BouncyCastle.X509;
+using RPKIdecoder.CrlClass;
 using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
 using System;
@@ -54,9 +55,9 @@ namespace RPKIdecoder
                         foreach (string roaToOpen in Directory.GetFiles(directoryPath, "*" + fileToDecode, SearchOption.AllDirectories))
                         {
                             byte[] fileCrl = File.ReadAllBytes(roaToOpen);
-                            X509Crl decodedCrl = DecoderData.DecodeCRL(fileCrl);
+                            CRL decodedCrl = DecoderData.DecodeCRL(fileCrl);
                             Console.WriteLine("Common name : " + fileToDecode);
-                            if (decodedCrl.IssuerDN.ToString() != decodedMft.getIssuerNumber())
+                            if (decodedCrl.getIssuerNumber() != decodedMft.getIssuerNumber())
                                 throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedCrl);
                             decodedMft.getCrlList().Add(decodedCrl);
