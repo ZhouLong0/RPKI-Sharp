@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace RPKIdecoder.CrlClass
 {
-    class revokedCertificate
+    public class revokedCertificate
     {
         private DateTime revocationTime;
         private BigInteger serialNumber;

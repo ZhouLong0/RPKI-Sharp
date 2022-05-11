@@ -42,8 +42,8 @@ namespace RPKIdecoder
                             byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
                             ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
                             decodedRoa.setCommonName(fileToDecode);
-                            if (decodedRoa.getIssuerNumber() != decodedMft.getIssuerNumber())
-                                throw new DifferentIssuerNumbersException();
+                            //if (decodedRoa.getIssuerNumber() != decodedMft.getIssuerNumber())
+                            //    throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedRoa);
                             decodedMft.getRoaList().Add(decodedRoa);
                             

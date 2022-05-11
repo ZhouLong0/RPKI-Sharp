@@ -3,7 +3,7 @@ using System.Text;
 
 namespace RPKIdecoder
 {
-    internal class IpAddressBlock
+    public class IpAddressBlock
     {
         private string addressFamily;
 

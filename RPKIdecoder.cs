@@ -1,53 +1,50 @@
-﻿using System;
-using System.IO;
-using System.Security.Cryptography.Pkcs;
-using System.Formats.Asn1;
-using System.Numerics;
-using System.Collections.Generic;
+﻿using RPKIdecoder.CrlClass;
 using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
-using System.Security.Cryptography.X509Certificates;
-using Org.BouncyCastle.X509;
-using RPKIdecoder.CrlClass;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Numerics;
 
 namespace RPKIdecoder
 {
     class RPKIdecoder
     {
-       
+
 
         static void Main(string[] args)
         {
             /***************************************** open ALL files from directory path *****************************************/
 
 
-            string directoryPath = @"C:\Users\zhoul\Desktop\Nostromo2122";
-            string directoryPathYearBefore = @"C:\Users\zhoul\Desktop\2021\02\02\out\rta\validated\cb.rg.net";
+            //string directoryPath = @"C:\Users\zhoul\Desktop\Nostromo2122";
+            //string directoryPathYearBefore = @"C:\Users\zhoul\Desktop\2021\02\02\out\rta\validated\cb.rg.net";
 
-            List<MFT> decodedData = DirectoryDecoder.decode(directoryPath);
+            //List<MFT> decodedData = DirectoryDecoder.decode(directoryPath);
 
 
-            //check if all files of the directory have the same IssuerNumber
-            if (decodedData[0] != null)
-            {
-                bool sameIssuerNumber = true;
-                string issuerNumber = decodedData[0].getIssuerNumber();
+            ////check if all files of the directory have the same IssuerNumber
+            //if (decodedData[0] != null)
+            //{
+            //    bool sameIssuerNumber = true;
+            //    string issuerNumber = decodedData[0].getIssuerNumber();
 
-                foreach (MFT mft in decodedData)
-                {
-                    if (mft.getIssuerNumber() != issuerNumber)
-                    {
-                        sameIssuerNumber = false;
-                        break;
-                    }
-                }
+            //    foreach (MFT mft in decodedData)
+            //    {
+            //        if (mft.getIssuerNumber() != issuerNumber)
+            //        {
+            //            sameIssuerNumber = false;
+            //            break;
+            //        }
+            //    }
 
-                if (sameIssuerNumber)
-                    Console.WriteLine("ALL certificates of the directory have the same ISSUER NUMBER : " + issuerNumber + "\n\n\n");
-                else
-                    Console.WriteLine("NOT ALL certificates of the directory have the same ISSUER NUMBER \n\n\n");
+            //    if (sameIssuerNumber)
+            //        Console.WriteLine("ALL certificates of the directory have the same ISSUER NUMBER : " + issuerNumber + "\n\n\n");
+            //    else
+            //        Console.WriteLine("NOT ALL certificates of the directory have the same ISSUER NUMBER \n\n\n");
 
-            }
+            //}
 
 
             //Console.WriteLine("\nNEXT YEAR\n");
@@ -59,23 +56,21 @@ namespace RPKIdecoder
             /******************************************************************************************************************/
             /************************************* TAKE A CRL AND FIND REVOKED FILES ******************************************/
             /******************************************************************************************************************/
-            //string crlPath = @"C:\Users\zhoul\Desktop\Nostromo2122\nostromo.heficed.net\repo\635153\0\7D99D2758F25260E783E9FADCBA2F104EE8FA5EB.crl";
-            //string directoryToSearch = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
-            //CRL decodedCrl = DecoderData.DecodeCRL(File.ReadAllBytes(crlPath));
-            //Console.WriteLine(decodedCrl);
-
-            //foreach (string roaToOpen in Directory.GetFiles(directoryToSearch, "*.roa", SearchOption.AllDirectories))
-            //{
-            //    byte[] fileRoa = File.ReadAllBytes(roaToOpen);
-            //    byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
-            //    ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
-            //    decodedRoa.setCommonName(roaToOpen);
+            string crlPath = @"C:\Users\zhoul\Desktop\Nostromo2122\nostromo.heficed.net2205\nostromo.heficed.net\repo\1123811\0\4B151ED770262B02592C17950451FCB75FF28048.crl";
+            string directoryToSearch = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
 
 
-            //    Console.WriteLine(decodedRoa);
-            //}
+            //Find.searchAllRoasWithAs(directoryToSearch, 61317);
+
+            //61317 //"193.227.122.0"
+            
+            
+            BigInteger toFind = BigInteger.Parse("109273999038951886640175512259971706242996001189");
+            Find.searchRevocation(directoryToSearch, toFind);
+            //61317 //"193.227.122.0"
+            
 
 
 

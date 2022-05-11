@@ -2,7 +2,7 @@
 
 namespace RPKIdecoder
 {
-    internal class Address
+    public class Address
     {
         IPAddress ipAddress;
 
