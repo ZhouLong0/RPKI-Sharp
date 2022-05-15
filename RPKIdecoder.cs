@@ -15,11 +15,12 @@ namespace RPKIdecoder
 
         static void Main(string[] args)
         {
+            /**********************************************************************************************************************/
             /***************************************** open ALL files from directory path *****************************************/
+            /**********************************************************************************************************************/
 
 
-            //string directoryPath = @"C:\Users\zhoul\Desktop\Nostromo2122";
-            //string directoryPathYearBefore = @"C:\Users\zhoul\Desktop\2021\02\02\out\rta\validated\cb.rg.net";
+            string directoryPath = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
             //List<MFT> decodedData = DirectoryDecoder.decode(directoryPath);
 
@@ -47,9 +48,6 @@ namespace RPKIdecoder
             //}
 
 
-            //Console.WriteLine("\nNEXT YEAR\n");
-
-            //List<MFT> decodedData2 = DirectoryDecoder.decode(directoryPath2);
 
 
 
@@ -57,7 +55,7 @@ namespace RPKIdecoder
             /************************************* TAKE A CRL AND FIND REVOKED FILES ******************************************/
             /******************************************************************************************************************/
 
-            string crlPath = @"C:\Users\zhoul\Desktop\Nostromo2122\nostromo.heficed.net2205\nostromo.heficed.net\repo\1123811\0\4B151ED770262B02592C17950451FCB75FF28048.crl";
+
             string directoryToSearch = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
 
@@ -65,11 +63,15 @@ namespace RPKIdecoder
             //Find.searchAllRoasWithAs(directoryToSearch, 61317);
 
             //61317 //"193.227.122.0"
-            
-            
-            BigInteger toFind = BigInteger.Parse("109273999038951886640175512259971706242996001189");
-            Find.searchRevocation(directoryToSearch, toFind);
+            //Find.searchAllRoasWithIp(directoryToSearch, "193.227.129.0");
+
+            //BigInteger  toFind = BigInteger.Parse("448263085674351701227297377749888883408767793851");
+            //Find.searchRevocation(directoryToSearch, toFind);
             //61317 //"193.227.122.0"
+
+
+            DateTime date = new DateTime(2022, 04, 4);
+            FileManager.DownloadFile(date);
             
 
 

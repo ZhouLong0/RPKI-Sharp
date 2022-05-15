@@ -241,14 +241,16 @@ namespace RPKIdecoder
             decodedCrl.setThisUpdate(decodedX509Crl.ThisUpdate);
             decodedCrl.setNextUpdate(decodedX509Crl.NextUpdate.Value);
 
-            foreach (X509CrlEntry rc in decodedX509Crl.GetRevokedCertificates())
+            if (decodedCrl.getRevokedCertificates() != null)
             {
-                revokedCertificate revokedCertificate = new revokedCertificate();
-                revokedCertificate.setSerialNumber(BigInteger.Parse(rc.SerialNumber.ToString()));
-                revokedCertificate.setRevocationTime(rc.RevocationDate);
-                decodedCrl.getRevokedCertificates().Add(revokedCertificate);
+                foreach (X509CrlEntry rc in decodedX509Crl.GetRevokedCertificates())
+                {
+                    revokedCertificate revokedCertificate = new revokedCertificate();
+                    revokedCertificate.setSerialNumber(BigInteger.Parse(rc.SerialNumber.ToString()));
+                    revokedCertificate.setRevocationTime(rc.RevocationDate);
+                    decodedCrl.getRevokedCertificates().Add(revokedCertificate);
+                }
             }
-
             return decodedCrl;
         }
 
