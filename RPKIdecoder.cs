@@ -70,9 +70,10 @@ namespace RPKIdecoder
             //61317 //"193.227.122.0"
 
 
-            DateTime date = new DateTime(2022, 04, 4);
-            FileManager.DownloadFile(date);
-            
+            DateTime date = new DateTime(2013, 01, 01);
+            String folder = @"C:\Users\zhoul\Desktop\AutoDownloadFolder\";
+            String gzFile = FileManager.DownloadFile(date, folder);
+            FileManager.ExtractTGZ(gzFile, @"C:\Users\zhoul\Desktop\AutoDownloadFolder\" + date.Year + "-" + date.Month + "-" + date.Day);
 
 
 
