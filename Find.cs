@@ -11,8 +11,9 @@ namespace RPKIdecoder
     static class Find
     {
 
-        public static void searchAllRoasWithIp(String directoryToSearch, String IpToFind)
+        public static List<ROA> searchAllRoasWithIp(String directoryToSearch, String IpToFind)
         {
+            Console.WriteLine("Checking all certificates");
             System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpToFind);
             List<ROA> decodedROAS = new List<ROA>();
 
@@ -27,6 +28,7 @@ namespace RPKIdecoder
                 //Console.WriteLine(decodedRoa);
             }
             //61317 //"193.227.122.0"
+            Console.WriteLine("Writing results");
             TextWriter tsw = new StreamWriter(@"C:\Users\zhoul\Desktop\" + IpToFind +".txt");
             foreach (ROA r in decodedROAS)
             {
@@ -34,8 +36,10 @@ namespace RPKIdecoder
                 {
                     foreach (Address ad in ip.getAddresses())
                     {
-                        if (ad.getIpAddress().Equals(ipaddress))
+                        if (ad.getIpAddress().Equals(ipaddress)) {
+                            Console.WriteLine(r);
                             tsw.WriteLine(r.ToString());
+                    }
                     }
                 }
                 //if(r.getAsNumber() == 61317)
@@ -45,6 +49,7 @@ namespace RPKIdecoder
                 //}
             }
             tsw.Close();
+            return decodedROAS;
         }
 
         public static void searchAllRoasWithAs(String directoryToSearch, BigInteger AsToFind )

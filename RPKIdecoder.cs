@@ -69,11 +69,26 @@ namespace RPKIdecoder
             //Find.searchRevocation(directoryToSearch, toFind);
             //61317 //"193.227.122.0"
 
-
-            DateTime date = new DateTime(2013, 01, 01);
+            String ipAddress = "193.227.129.0";
+            DateTime date = new DateTime(2021, 01, 01);
             String folder = @"C:\Users\zhoul\Desktop\AutoDownloadFolder\";
+            Console.Write(DateTime.Now + "   ");
             String gzFile = FileManager.DownloadFile(date, folder);
-            FileManager.ExtractTGZ(gzFile, @"C:\Users\zhoul\Desktop\AutoDownloadFolder\" + date.Year + "-" + date.Month + "-" + date.Day);
+            String extractedFolder = folder + date.Year + "-" + date.Month + "-" + date.Day;
+            Console.Write(DateTime.Now + "   ");
+            FileManager.ExtractTGZ(gzFile, extractedFolder);
+            Console.Write(DateTime.Now + "   ");
+            if (Find.searchAllRoasWithIp(extractedFolder, ipAddress).Count != 0)
+            {
+
+                Console.WriteLine("Valid IpAddress");
+            }
+            else
+            {
+                Console.WriteLine("IP address not certificated");
+            }
+            Console.Write(DateTime.Now + "   ");
+
 
 
 
