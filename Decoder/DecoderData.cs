@@ -110,7 +110,7 @@ namespace RPKIdecoder
                    
                     decodedAddress.setIpAddress(ip);
                     decodedAddress.setNetmask(netMask);
-
+                    decodedAddress.setPrefix(new IPNetwork(ip, (byte) netMask));
                     
 
                     decodedIpAddressBlock.getAddresses().Add(decodedAddress);
@@ -241,7 +241,7 @@ namespace RPKIdecoder
             decodedCrl.setThisUpdate(decodedX509Crl.ThisUpdate);
             decodedCrl.setNextUpdate(decodedX509Crl.NextUpdate.Value);
 
-            if (decodedCrl.getRevokedCertificates() != null)
+            if (decodedX509Crl.GetRevokedCertificates() != null)
             {
                 foreach (X509CrlEntry rc in decodedX509Crl.GetRevokedCertificates())
                 {

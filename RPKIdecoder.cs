@@ -54,8 +54,6 @@ namespace RPKIdecoder
             /******************************************************************************************************************/
             /************************************* TAKE A CRL AND FIND REVOKED FILES ******************************************/
             /******************************************************************************************************************/
-
-
             string directoryToSearch = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
 
@@ -63,31 +61,47 @@ namespace RPKIdecoder
             //Find.searchAllRoasWithAs(directoryToSearch, 61317);
 
             //61317 //"193.227.122.0"
-            //Find.searchAllRoasWithIp(directoryToSearch, "193.227.129.0");
+
+            ///////////////////////*k*///////////////////////////////////////////
+            //IPAddress ip = IPAddress.Parse("193.227.122.0");
+            //IPNetwork prefix = new IPNetwork(ip, (Byte)24);
+            //Find.searchAllRoasWithIp(directoryToSearch, prefix);
 
             //BigInteger  toFind = BigInteger.Parse("448263085674351701227297377749888883408767793851");
             //Find.searchRevocation(directoryToSearch, toFind);
             //61317 //"193.227.122.0"
 
-            String ipAddress = "193.227.129.0";
-            DateTime date = new DateTime(2021, 01, 01);
-            String folder = @"C:\Users\zhoul\Desktop\AutoDownloadFolder\";
-            Console.Write(DateTime.Now + "   ");
-            String gzFile = FileManager.DownloadFile(date, folder);
-            String extractedFolder = folder + date.Year + "-" + date.Month + "-" + date.Day;
-            Console.Write(DateTime.Now + "   ");
-            FileManager.ExtractTGZ(gzFile, extractedFolder);
-            Console.Write(DateTime.Now + "   ");
-            if (Find.searchAllRoasWithIp(extractedFolder, ipAddress).Count != 0)
-            {
 
-                Console.WriteLine("Valid IpAddress");
-            }
-            else
-            {
-                Console.WriteLine("IP address not certificated");
-            }
-            Console.Write(DateTime.Now + "   ");
+            //195.114.24.0/23   and   2a00:1f00::/32
+
+            IPAddress ipAddress = IPAddress.Parse("194.154.32.0");
+            int cidr = 19;
+            DateTime date = new DateTime(2013, 01, 01);
+
+
+            IPNetwork prefix = new IPNetwork(ipAddress, (Byte)cidr);
+            String folder = @"C:\Users\zhoul\Desktop\AutoDownloadFolder\";
+            Controller.verifyIPAddress(prefix, cidr, date, folder);
+
+
+            //IPAddress ipaddress = IPAddress.Parse("193.250.0.0");
+            //int cidr = 24;
+
+            //IPNetwork prefix = new IPNetwork(ipaddress, (byte)cidr);
+
+            //IPNetwork prefix2 = new IPNetwork(ipaddress, (byte)cidr);
+            //IPNetwork prefix3 = new IPNetwork(ipaddress, (byte)25);
+            //IPNetwork prefix4 = new IPNetwork(ipaddress, (byte)23);
+            //IPNetwork prefix5 = new IPNetwork(IPAddress.Parse("193.250.1.0"), (byte)24);
+            //Console.WriteLine(prefix.Total + "number of total ip");
+            //Console.WriteLine(prefix.Contains(IPAddress.Parse("193.250.0.120")) + "   should be true");
+            //Console.WriteLine(prefix.Contains(IPAddress.Parse("193.250.0.0")) + "   should be true");
+            //Console.WriteLine(prefix.Contains(IPAddress.Parse("193.250.0.255")) + "   should be true");
+            //Console.WriteLine(prefix.Contains(IPAddress.Parse("193.250.1.0")) + "   should be false");
+            //Console.WriteLine(prefix.Overlap(prefix2) + "   should be true");
+            //Console.WriteLine(prefix.Overlap(prefix3) + "   should be true");
+            //Console.WriteLine(prefix.Overlap(prefix4) + "   should be true");
+            //Console.WriteLine(prefix.Overlap(prefix5) + "   should be false");
 
 
 

@@ -8,8 +8,23 @@ namespace RPKIdecoder
 
         int netmask;
 
+        IPNetwork prefix;
+
         int maxLength;
 
+        public Address()
+        {
+            this.prefix = new IPNetwork();
+        }
+
+        public IPNetwork getPrefix()
+        {
+            return this.prefix;
+        }
+        public void setPrefix(IPNetwork prefix)
+        {
+            this.prefix = prefix;
+        }
 
         public IPAddress getIpAddress()
         {
@@ -46,9 +61,9 @@ namespace RPKIdecoder
         {
             if (this.maxLength == 0)
             {
-                return "IP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : not present \n" ;
+                return "IP address : " + this.getPrefix().ToString() + "\n" + "Max length : not present \n" ;
             }
-            return "IP address : " + this.ipAddress + "/" + this.netmask + "\n" + "Max length : " + this.maxLength + "\n";
+            return "IP address : " + this.getPrefix().ToString() + "\n" + "Max length : " + this.maxLength + "\n";
         }
     }
 }
