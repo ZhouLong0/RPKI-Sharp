@@ -139,6 +139,10 @@ namespace RPKIdecoder
                             if (maxLength > 128) throw new InvalidMaxLength();
 
                     }
+                    else
+                    {
+                        decodedAddress.setMaxLength(decodedAddress.getNetmask());
+                    }
 
 
 

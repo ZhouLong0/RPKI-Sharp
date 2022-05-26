@@ -11,11 +11,12 @@ namespace RPKIdecoder
     static class Find
     {
 
-        public static List<ROA> searchAllRoasWithIp(String directoryToSearch, IPNetwork prefixToFind)
+        public static List<ROA>[] searchAllRoasWithIp(String directoryToSearch, IPNetwork prefixToFind)
         {
             Console.WriteLine("Checking all certificates\n");
             //System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpToFind);
             List<ROA> decodedROAS = new List<ROA>();
+            
 
             foreach (string roaToOpen in Directory.GetFiles(directoryToSearch, "*.roa", SearchOption.AllDirectories))
             {
@@ -29,7 +30,11 @@ namespace RPKIdecoder
             }
             //61317 //"193.227.122.0"
             Console.WriteLine("Writing interesting ROAs");
+            List<ROA>[] TwoRoaList = new List<ROA>[2];
             List<ROA> returnList = new List<ROA>();
+            List<ROA> moreSpecified = new List<ROA>();
+            TwoRoaList[0] = returnList;
+            TwoRoaList[1] = moreSpecified;
             //TextWriter tsw = new StreamWriter(@"C:\Users\zhoul\Desktop\" + IpToFind +".txt");
             foreach (ROA r in decodedROAS)
             {
@@ -37,11 +42,14 @@ namespace RPKIdecoder
                 {
                     foreach (Address ad in ip.getAddresses())
                     {
-                        if (ad.getPrefix().Contains(prefixToFind))
+                        if (ad.getPrefix().Contains(prefixToFind) &&  prefixToFind.Cidr <= ad.getMaxLength())
                         {
-                            Console.WriteLine(r);
                             if (!returnList.Contains(r)) returnList.Add(r);
                             //tsw.WriteLine(r.ToString());
+                        }
+                        if(prefixToFind.Contains(ad.getPrefix()))
+                        {
+                            if (!moreSpecified.Contains(r)) moreSpecified.Add(r);
                         }
                     }
                 }
@@ -52,7 +60,7 @@ namespace RPKIdecoder
                 //}
             }
             //tsw.Close();
-            return returnList;
+            return TwoRoaList;
         }
 
         public static List<ROA> searchAllRoasWithIp(String directoryToSearch, IPAddress prefixToFind)
