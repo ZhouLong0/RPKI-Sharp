@@ -16,16 +16,18 @@ namespace RPKIdecoder
             Console.WriteLine("Checking all certificates\n");
             //System.Net.IPAddress ipaddress = System.Net.IPAddress.Parse(IpToFind);
             List<ROA> decodedROAS = new List<ROA>();
-            
+
 
             foreach (string roaToOpen in Directory.GetFiles(directoryToSearch, "*.roa", SearchOption.AllDirectories))
             {
-                byte[] fileRoa = File.ReadAllBytes(roaToOpen);
-                byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
-                ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
-                decodedRoa.setCommonName(roaToOpen);
-                decodedROAS.Add(decodedRoa);
-
+                if (roaToOpen.Contains("\\validated"))
+                {
+                    byte[] fileRoa = File.ReadAllBytes(roaToOpen);
+                    byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
+                    ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
+                    decodedRoa.setCommonName(roaToOpen);
+                    decodedROAS.Add(decodedRoa);
+                }
                 //Console.WriteLine(decodedRoa);
             }
             //61317 //"193.227.122.0"
@@ -42,12 +44,12 @@ namespace RPKIdecoder
                 {
                     foreach (Address ad in ip.getAddresses())
                     {
-                        if (ad.getPrefix().Contains(prefixToFind) &&  prefixToFind.Cidr <= ad.getMaxLength())
+                        if (ad.getPrefix().Contains(prefixToFind) && prefixToFind.Cidr <= ad.getMaxLength())
                         {
                             if (!returnList.Contains(r)) returnList.Add(r);
                             //tsw.WriteLine(r.ToString());
                         }
-                        if(prefixToFind.Contains(ad.getPrefix()))
+                        if (prefixToFind.Contains(ad.getPrefix()))
                         {
                             if (!moreSpecified.Contains(r)) moreSpecified.Add(r);
                         }
