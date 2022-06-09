@@ -25,10 +25,11 @@ namespace RPKIdecoder
             int undecodedBit;                          
             int offset = 0;
 
-            decodedRoa.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
-            decodedRoa.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
-            decodedRoa.setSerialNumber(ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
-            decodedRoa.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileRoa));
+            ExtractEnvelopedData.ExtractSetUp(decodedRoa, fileRoa);
+            //decodedRoa.setStartDateTime(ExtractEnvelopedData.ExtractStartDateTime(fileRoa));
+            //decodedRoa.setEndDateTime(ExtractEnvelopedData.ExtractEndDateTime(fileRoa));
+            //decodedRoa.setSerialNumber(ExtractEnvelopedData.ExtractSerialNumber(fileRoa));
+            //decodedRoa.setIssuerNumber(ExtractEnvelopedData.ExtractIssuerNumber(fileRoa));
             /***********************************************************************************/
             /******************* DECODING SEQUENCE: ROUTE ORIGIN ADDRESS ***********************/
             /***********************************************************************************/

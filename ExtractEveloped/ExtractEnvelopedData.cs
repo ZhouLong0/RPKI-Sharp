@@ -95,5 +95,21 @@ namespace RPKIdecoder.ExtractEveloped
 
             return cms.Certificates[0].GetIssuerName();
         }
+
+       public static void ExtractSetUp(ROA roa, byte[] signature)
+        {
+            if (signature == null)
+                throw new ArgumentNullException("signature");
+
+            SignedCms cms = new SignedCms();
+            cms.Decode(signature);
+            if (cms.Detached)
+                throw new InvalidOperationException("Cannot extract enveloped content from a detached signature.");
+
+            roa.setStartDateTime(cms.Certificates[0].NotBefore);
+            roa.setEndDateTime(cms.Certificates[0].NotAfter);
+            roa.setIssuerNumber(cms.Certificates[0].GetIssuerName());
+            roa.setSerialNumber(new BigInteger(cms.Certificates[0].GetSerialNumber()));
+        }
     }
 }

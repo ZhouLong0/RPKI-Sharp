@@ -75,14 +75,14 @@ namespace RPKIdecoder
             //195.114.24.0/23   and   2a00:1f00::/32
 
             IPAddress ipAddress = IPAddress.Parse("194.154.32.0");
-            int cidr = 20;
+            int cidr = 18;
             DateTime date = new DateTime(2013, 01, 01);
 
 
             IPNetwork prefix = new IPNetwork(ipAddress, (Byte)cidr);
             String folder = @"C:\Users\zhoul\Desktop\AutoDownloadFolder\";
             Controller.verifyIPAddress(prefix, cidr, date, folder);
-            Controller.verifyIPAddress(ipAddress, cidr, date, folder);
+            //Controller.verifyIPAddress(ipAddress, cidr, date, folder);
 
             //IPAddress ipaddress = IPAddress.Parse("193.250.0.0");
             //int cidr = 24;
