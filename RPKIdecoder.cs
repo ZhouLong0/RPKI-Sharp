@@ -74,16 +74,17 @@ namespace RPKIdecoder
 
             //195.114.24.0/23   and   2a00:1f00::/32
 
-            Console.WriteLine("Insert IP: ");
-            IPAddress ipAddress = IPAddress.Parse(Convert.ToString(Console.ReadLine()));
-            Console.WriteLine("Insert cidr: ");
-            int cidr = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine("Insert date (dd/mm/year): ");
-            DateTime date = Convert.ToDateTime(Console.ReadLine());
+            /********************************user****************************/
+            //Console.WriteLine("Insert IP: ");
+            //IPAddress ipAddress = IPAddress.Parse(Convert.ToString(Console.ReadLine()));
+            //Console.WriteLine("Insert cidr: ");
+            //int cidr = Convert.ToInt32(Console.ReadLine());
+            //Console.WriteLine("Insert date (dd/mm/year): ");
+            //DateTime date = Convert.ToDateTime(Console.ReadLine());
 
-            //DateTime date = new DateTime(2015, 01, 01);
-            //int cidr = 18;
-            //IPAddress ipAddress = IPAddress.Parse("194.154.32.0");
+            DateTime date = new DateTime(2015, 01, 01);
+            int cidr = 18;
+            IPAddress ipAddress = IPAddress.Parse("194.154.32.0");
 
 
 
