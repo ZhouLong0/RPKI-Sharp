@@ -59,5 +59,24 @@ namespace RPKIdecoder.CrlClass
             return stringa.ToString();
         }
 
+        public bool containsRoa(ROA roa)
+        {
+            foreach(revokedCertificate rc in this.getRevokedCertificates())
+            {
+                if (rc.getSerialNumber() == roa.getSerialNumber())
+                    return true; 
+            }
+            return false;
+        }
+
+        public static bool containsRoa(List<CRL> crls, ROA roa)
+        {
+            foreach (CRL crl in crls)
+            {
+                if (crl.containsRoa(roa))
+                    return true;
+            }
+            return false;
+        }
     }
 }

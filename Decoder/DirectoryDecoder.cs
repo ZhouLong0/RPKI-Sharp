@@ -1,11 +1,9 @@
-﻿using Org.BouncyCastle.X509;
-using RPKIdecoder.CrlClass;
+﻿using RPKIdecoder.CrlClass;
 using RPKIdecoder.ExtractEveloped;
 using RPKIdecoder.MftClass;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 
 namespace RPKIdecoder
 {
@@ -13,9 +11,9 @@ namespace RPKIdecoder
     {
         public static List<MFT> decode(String directoryPath)
         {
-            
+
             List<MFT> decodedMftsList = new List<MFT>();
-          
+
 
             foreach (string mftName in Directory.GetFiles(directoryPath, "*.mft", SearchOption.AllDirectories))
             {
@@ -26,7 +24,7 @@ namespace RPKIdecoder
                 MFT decodedMft = DecoderData.DecodeMFT(fileMft, extracted);
                 Console.WriteLine(" ************************ DECODING MFT ************************* ");
                 Console.WriteLine(decodedMft);
-                
+
 
 
                 /********************************** START TO DECODE CERTIFICATES IN THE MANIFEST **************************************/
@@ -46,7 +44,7 @@ namespace RPKIdecoder
                             //    throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedRoa);
                             decodedMft.getRoaList().Add(decodedRoa);
-                            
+
 
                         }
                     }
@@ -61,7 +59,7 @@ namespace RPKIdecoder
                                 throw new DifferentIssuerNumbersException();
                             Console.WriteLine(decodedCrl);
                             decodedMft.getCrlList().Add(decodedCrl);
-                            
+
                         }
                     }
 
@@ -70,5 +68,44 @@ namespace RPKIdecoder
             }
             return decodedMftsList;
         }
+
+        public static List<ROA> decodeVerifiedRoas(String directoryToSearch)
+        {
+            List<ROA> decodedROAS = new List<ROA>();
+
+
+            foreach (string roaToOpen in Directory.GetFiles(directoryToSearch, "*.roa", SearchOption.AllDirectories))
+            {
+                if (roaToOpen.Contains("\\validated"))
+                {
+                    byte[] fileRoa = File.ReadAllBytes(roaToOpen);
+                    byte[] extractedFileRoa = ExtractEnvelopedData.ExtractContent(fileRoa);
+                    ROA decodedRoa = DecoderData.DecodeROA(fileRoa, extractedFileRoa);
+                    decodedRoa.setCommonName(roaToOpen);
+                    decodedROAS.Add(decodedRoa);
+                }
+            }
+
+            return decodedROAS;
+        }
+
+        public static List<CRL> decodeVerifiedCrls(String directoryToSearch)
+        {
+            List<CRL> decodedCrls = new List<CRL>();
+
+            foreach (string crlToOpen in Directory.GetFiles(directoryToSearch, "*crl", SearchOption.AllDirectories))
+            {
+                if (crlToOpen.Contains("\\validated"))
+                {
+                    byte[] fileCrl = File.ReadAllBytes(crlToOpen);
+                    CRL decodedCrl = DecoderData.DecodeCRL(fileCrl);
+                    decodedCrls.Add(decodedCrl);
+                }
+
+            }
+
+            return decodedCrls;
+        }
     }
 }
+
