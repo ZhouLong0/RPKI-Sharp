@@ -20,7 +20,6 @@ namespace RPKIdecoder
             /**********************************************************************************************************************/
 
 
-            string directoryPath = @"C:\Users\zhoul\Desktop\Nostromo2122";
 
             //List<MFT> decodedData = DirectoryDecoder.decode(directoryPath);
 
