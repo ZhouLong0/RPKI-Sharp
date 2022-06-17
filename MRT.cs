@@ -16,9 +16,9 @@ namespace RPKIdecoder
         public static void MRTWriteResult()
         {
             /* *****CHANGE PATH*****           Table output file*/
-            TextWriter tsw = new StreamWriter(@"C:\Users\zhoul\Desktop\MRT20201225.txt");
+            TextWriter tsw = new StreamWriter(@"C:\Users\zhoul\Desktop\MRT20120601\table.txt");
             /* *****CHANGE PATH*****           Stats output file*/
-            TextWriter statsFile = new StreamWriter(@"C:\Users\zhoul\Desktop\MRT20201225stats.txt");
+            TextWriter statsFile = new StreamWriter(@"C:\Users\zhoul\Desktop\MRT20120601\stats.txt");
 
             tsw.WriteLine("Prefix\tAsNumber\tExistRecord\tValid\tNCertificates\tNAuthAs\tAuthAs's");
 

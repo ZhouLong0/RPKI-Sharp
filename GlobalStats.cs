@@ -42,8 +42,8 @@ namespace RPKIdecoder
 
         public void globalUpdate()
         {
-            POfRecordedPrefix = NOfRecordedPrefix / nOfLines;
-            POfValidAnn = NOfValidAnn / nOfLines;
+            POfRecordedPrefix = NOfRecordedPrefix / (float)nOfLines;
+            POfValidAnn = NOfValidAnn / (float)nOfLines;
         }
 
 
