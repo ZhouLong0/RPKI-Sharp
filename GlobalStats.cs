@@ -15,6 +15,8 @@ namespace RPKIdecoder
 
         float pOfValidAnn;
 
+        float pOfInvalidAnn;
+
         public GlobalStats()
         {
             ;
@@ -25,6 +27,7 @@ namespace RPKIdecoder
         public uint NOfValidAnn { get => nOfValidAnn; set => nOfValidAnn = value; }
         public float POfRecordedPrefix { get => pOfRecordedPrefix; set => pOfRecordedPrefix = value; }
         public float POfValidAnn { get => pOfValidAnn; set => pOfValidAnn = value; }
+        public float POfInvalidAnn { get => pOfInvalidAnn; set => pOfInvalidAnn = value; }
 
         public void lineUpdate(RibTableLine ribTableLine)
         {
@@ -44,6 +47,7 @@ namespace RPKIdecoder
         {
             POfRecordedPrefix = NOfRecordedPrefix / (float)nOfLines;
             POfValidAnn = NOfValidAnn / (float)nOfLines;
+
         }
 
 

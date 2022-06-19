@@ -1,6 +1,7 @@
 ﻿using RPKIdecoder.CrlClass;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Numerics;
 using System.Text;
@@ -132,9 +133,9 @@ namespace RPKIdecoder
                 {
                     ribTableLine.ExistRecord = true;
                     ribTableLine.NumberOfRecords++;
-                    if (!ribTableLine.AuthorizedAs.Contains((int)roa.getAsNumber()))
-                        ribTableLine.AuthorizedAs.Add((int)roa.getAsNumber());
-                    if ((uint)roa.getAsNumber() == asNumber && !CRL.containsRoa(cRLs, roa))
+                    if (!ribTableLine.AuthorizedAs.Contains((uint)roa.getAsNumber()))
+                        ribTableLine.AuthorizedAs.Add((uint)roa.getAsNumber());
+                    if ((uint)roa.getAsNumber() == asNumber)
                         ribTableLine.Valid = true;
                 }
             }

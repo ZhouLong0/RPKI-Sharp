@@ -21,11 +21,11 @@ namespace RPKIdecoder
 
         private int numberOfDifferentAuthorizedAs;
         
-        List<int> authorizedAs;
+        List<uint> authorizedAs;
 
         public RibTableLine()
         {
-            this.authorizedAs = new List<int>();
+            this.authorizedAs = new List<uint>();
         }
 
         public IPNetwork Prefix { get => prefix; set => prefix = value; }
@@ -34,7 +34,7 @@ namespace RPKIdecoder
         public bool Valid { get => valid; set => valid = value; }
         public int NumberOfRecords { get => numberOfRecords; set => numberOfRecords = value; }
         public int NumberOfDifferentAuthorizedAs { get => numberOfDifferentAuthorizedAs; set => numberOfDifferentAuthorizedAs = value; }
-        public List<int> AuthorizedAs { get => authorizedAs; set => authorizedAs = value; }
+        public List<uint> AuthorizedAs { get => authorizedAs; set => authorizedAs = value; }
 
         override
         public String ToString()
