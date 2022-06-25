@@ -40,7 +40,7 @@ namespace RPKIdecoder
         public String ToString()
         {
             StringBuilder authas = new StringBuilder();
-            foreach(int asN in authorizedAs)
+            foreach(uint asN in authorizedAs)
             {
                 authas.Append(asN + ",");
             }
