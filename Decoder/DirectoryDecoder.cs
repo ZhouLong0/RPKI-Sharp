@@ -69,7 +69,7 @@ namespace RPKIdecoder
             return decodedMftsList;
         }
 
-        public static List<ROA> decodeVerifiedRoas(String directoryToSearch)
+        public static List<ROA> decodeRoas(String directoryToSearch)
         {
             List<ROA> decodedROAS = new List<ROA>();
 
@@ -89,7 +89,7 @@ namespace RPKIdecoder
             return decodedROAS;
         }
 
-        public static List<CRL> decodeVerifiedCrls(String directoryToSearch)
+        public static List<CRL> decodeCrls(String directoryToSearch)
         {
             List<CRL> decodedCrls = new List<CRL>();
 
