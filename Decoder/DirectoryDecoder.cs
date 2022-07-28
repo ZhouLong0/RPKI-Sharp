@@ -9,7 +9,7 @@ namespace RPKIdecoder
 {
     class DirectoryDecoder
     {
-        public static List<MFT> decode(String directoryPath)
+        public static List<MFT> Decode(String directoryPath)
         {
 
             List<MFT> decodedMftsList = new List<MFT>();
@@ -69,7 +69,7 @@ namespace RPKIdecoder
             return decodedMftsList;
         }
 
-        public static List<ROA> decodeRoas(String directoryToSearch)
+        public static List<ROA> DecodeROAs(String directoryToSearch)
         {
             List<ROA> decodedROAS = new List<ROA>();
 
@@ -89,7 +89,7 @@ namespace RPKIdecoder
             return decodedROAS;
         }
 
-        public static List<CRL> decodeCrls(String directoryToSearch)
+        public static List<CRL> DecodeCRLs(String directoryToSearch)
         {
             List<CRL> decodedCrls = new List<CRL>();
 
