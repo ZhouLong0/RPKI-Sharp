@@ -24,8 +24,8 @@ namespace RPKIdecoder.Stats
             string directoryWithCertificates = @"C:\Users\zhoul\Desktop\ReposData\2017";
 
             /*Decoded certificates*/
-            List<ROA> decodedRoas = DirectoryDecoder.decodeRoas(directoryWithCertificates);
-            List<CRL> decodedCrls = DirectoryDecoder.decodeCrls(directoryWithCertificates);
+            List<ROA> decodedRoas = DirectoryDecoder.DecodeROAs(directoryWithCertificates);
+            List<CRL> decodedCrls = DirectoryDecoder.DecodeCRLs(directoryWithCertificates);
 
             Console.WriteLine(decodedRoas.Count + " Roas");
             Console.WriteLine(decodedCrls.Count + " Crls");
