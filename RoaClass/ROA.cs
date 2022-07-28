@@ -1,5 +1,9 @@
-﻿using System;
+﻿using RPKIdecoder.CrlClass;
+using RPKIdecoder.Stats;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net;
 using System.Numerics;
 using System.Text;
 
@@ -48,7 +52,7 @@ namespace RPKIdecoder
 
         public List<IpAddressBlock> getIpAddressBlock()
         {
-            return this.ipAddressBlocks;   
+            return this.ipAddressBlocks;
         }
 
         public void setStartDateTime(DateTimeOffset startDate)
@@ -100,6 +104,55 @@ namespace RPKIdecoder
             return stringa.ToString();
 
         }
+
+
+        public bool ContainsIPAddressRecord(IPNetwork ipAddress)
+        {
+            foreach (IpAddressBlock ip in this.getIpAddressBlock())
+            {
+                foreach (Address ad in ip.getAddresses())
+                {
+                    if (ad.getPrefix().Contains(ipAddress) && ipAddress.Cidr <= ad.getMaxLength())
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static RibTableLine createTableLine(List<ROA> roas,List<CRL> cRLs, IPNetwork ipAddress, uint asNumber)
+        {
+            
+            RibTableLine ribTableLine = new RibTableLine();
+            ribTableLine.Prefix = ipAddress;
+            ribTableLine.AsNumber = asNumber;
+
+            foreach (ROA roa in roas)
+            {
+                if (roa.ContainsIPAddressRecord(ipAddress))
+                {
+                    ribTableLine.ExistRecord = true;
+                    ribTableLine.NumberOfRecords++;
+                    if (!ribTableLine.AuthorizedAs.Contains((uint)roa.getAsNumber()))
+                        ribTableLine.AuthorizedAs.Add((uint)roa.getAsNumber());
+                    if ((uint)roa.getAsNumber() == asNumber)
+                        ribTableLine.Valid = true;
+                }
+            }
+
+            ribTableLine.NumberOfDifferentAuthorizedAs = ribTableLine.AuthorizedAs.Count;
+            return ribTableLine;
+        }
+
+   
+
+
+
+
+
+
+
 
     }
 }
